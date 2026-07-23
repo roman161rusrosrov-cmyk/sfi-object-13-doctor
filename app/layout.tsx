@@ -1,7 +1,8 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import SiteEnhancer from "./SiteEnhancer";
+import MobileBuffEnhancer from "./MobileBuffEnhancer";
 
 const publicBasePath = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
 
@@ -25,6 +26,13 @@ export const metadata: Metadata = {
   },
 };
 
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  viewportFit: "cover",
+  themeColor: "#050707",
+};
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -37,6 +45,7 @@ export default function RootLayout({
       >
         {children}
         <SiteEnhancer />
+        <MobileBuffEnhancer />
       </body>
     </html>
   );
