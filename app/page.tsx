@@ -239,7 +239,7 @@ function SectionView({ section }: { section: ArchiveSection }) {
     <article className="archive-section">
       <header className="section-header">
         <div>
-          <p className="section-code">{section.code} // ACCESS LOGGED</p>
+          <p className="section-code">{`${section.code} // ACCESS LOGGED`}</p>
           <p className="section-eyebrow">{section.eyebrow}</p>
           <h2>{section.title}</h2>
         </div>
@@ -434,7 +434,7 @@ function MutationView({
     <article className="archive-section mutation-view">
       <header className="mutation-header">
         <div>
-          <p className="section-code">{mutation.code} // ACCESS LOGGED</p>
+          <p className="section-code">{`${mutation.code} // ACCESS LOGGED`}</p>
           <div className="mutation-status">
             <span className="status-dot status-dot-red" />
             {mutation.status}
@@ -625,7 +625,7 @@ function ArchiveShell({
       <main className="archive-main" id="archive-content">
         <header className="mobile-header">
           <button type="button" onClick={() => selectSection("containment")}>
-            SFI <span>// OBJECT 13</span>
+            SFI <span>{"// OBJECT 13"}</span>
           </button>
           <button type="button" onClick={onRelock}>
             ЗАКРЫТЬ
