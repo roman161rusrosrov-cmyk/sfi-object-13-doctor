@@ -3,7 +3,7 @@ import { readFile, writeFile } from "node:fs/promises";
 const pagePath = new URL("../app/page.tsx", import.meta.url);
 const expansionPath = new URL("../app/MobileExpansion.tsx", import.meta.url);
 
-async function patchPage(): Promise<boolean> {
+async function patchPage() {
   let source = await readFile(pagePath, "utf8");
   let changed = false;
 
@@ -66,7 +66,7 @@ async function patchPage(): Promise<boolean> {
   return changed;
 }
 
-async function patchExpansion(): Promise<boolean> {
+async function patchExpansion() {
   let source = await readFile(expansionPath, "utf8");
 
   const oldFunction = `function injectBonusAbilities(): void {
