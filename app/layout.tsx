@@ -4,6 +4,7 @@ import "./globals.css";
 import SiteEnhancer from "./SiteEnhancer";
 import MobileBuffEnhancer from "./MobileBuffEnhancer";
 import MobileExpansion from "./MobileExpansion";
+import AbilityRegistryMerger from "./AbilityRegistryMerger";
 
 const publicBasePath = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
 
@@ -48,6 +49,7 @@ export default function RootLayout({
         <SiteEnhancer />
         <MobileBuffEnhancer />
         <MobileExpansion />
+        <AbilityRegistryMerger />
       </body>
     </html>
   );
