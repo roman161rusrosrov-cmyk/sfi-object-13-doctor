@@ -3,6 +3,27 @@
 import { useEffect } from "react";
 import { STAGE_PHOTOS } from "./stagePhotos";
 
+const PHOTO_STYLES = `
+  .mutation-stage-visual {
+    background: #020305 !important;
+    overflow: hidden;
+  }
+
+  .mutation-stage-visual img[data-real-stage-photo="true"] {
+    display: block !important;
+    width: 100% !important;
+    height: auto !important;
+    aspect-ratio: 1672 / 941 !important;
+    object-fit: cover !important;
+    object-position: center !important;
+    image-rendering: auto !important;
+    filter: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+    backface-visibility: hidden;
+  }
+`;
+
 function replaceStagePhotos(): void {
   const images = document.querySelectorAll<HTMLImageElement>(
     ".mutation-stage-visual img",
@@ -12,12 +33,15 @@ function replaceStagePhotos(): void {
     const source = STAGE_PHOTOS[index];
     if (!source) return;
 
-    if (image.src !== source) {
-      image.src = source;
+    if (image.getAttribute("src") !== source) {
+      image.setAttribute("src", source);
     }
 
-    image.alt = `Фоторегистрация стадии ${index + 1} поглощения Скверной`;
+    image.removeAttribute("srcset");
+    image.removeAttribute("sizes");
+    image.alt = `Оригинальная фотография стадии ${index + 1} поглощения Скверной`;
     image.loading = index < 2 ? "eager" : "lazy";
+    image.decoding = "async";
     image.dataset.realStagePhoto = "true";
   });
 }
@@ -25,7 +49,6 @@ function replaceStagePhotos(): void {
 export default function StagePhotoReplacer() {
   useEffect(() => {
     let frame = 0;
-    const timers: number[] = [];
 
     const apply = () => {
       window.cancelAnimationFrame(frame);
@@ -33,19 +56,22 @@ export default function StagePhotoReplacer() {
     };
 
     const observer = new MutationObserver(apply);
-    observer.observe(document.body, { childList: true, subtree: true });
+    observer.observe(document.body, {
+      childList: true,
+      subtree: true,
+      attributes: true,
+      attributeFilter: ["src", "srcset"],
+    });
 
     apply();
-    [100, 350, 800, 1600].forEach((delay) => {
-      timers.push(window.setTimeout(apply, delay));
-    });
+    const interval = window.setInterval(apply, 750);
 
     return () => {
       observer.disconnect();
       window.cancelAnimationFrame(frame);
-      timers.forEach((timer) => window.clearTimeout(timer));
+      window.clearInterval(interval);
     };
   }, []);
 
-  return null;
+  return <style>{PHOTO_STYLES}</style>;
 }
