@@ -5,6 +5,7 @@ import SiteEnhancer from "./SiteEnhancer";
 import MobileBuffEnhancer from "./MobileBuffEnhancer";
 import MobileExpansion from "./MobileExpansion";
 import AbilityRegistryMerger from "./AbilityRegistryMerger";
+import StagePhotoReplacer from "./StagePhotoReplacer";
 
 const publicBasePath = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
 
@@ -50,6 +51,7 @@ export default function RootLayout({
         <MobileBuffEnhancer />
         <MobileExpansion />
         <AbilityRegistryMerger />
+        <StagePhotoReplacer />
       </body>
     </html>
   );
