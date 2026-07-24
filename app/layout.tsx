@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import SiteEnhancer from "./SiteEnhancer";
 import MobileBuffEnhancer from "./MobileBuffEnhancer";
+import MobileExpansion from "./MobileExpansion";
 
 const publicBasePath = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
 
@@ -46,6 +47,7 @@ export default function RootLayout({
         {children}
         <SiteEnhancer />
         <MobileBuffEnhancer />
+        <MobileExpansion />
       </body>
     </html>
   );
